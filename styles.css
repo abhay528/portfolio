@@ -395,6 +395,24 @@ a:focus-visible, button:focus-visible {
 }
 .card:hover .card-link { color: #dcc2ff; }
 
+/* Card media thumbnails (real product captures) */
+.card .card-thumb {
+  display: block;
+  margin: -30px -28px 8px;
+  border-radius: 15px 15px 10px 10px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #0d0221;
+  border-bottom: 1px solid var(--border);
+}
+.card .card-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
 .chips {
   list-style: none;
   display: flex;
@@ -524,6 +542,12 @@ a:focus-visible, button:focus-visible {
   align-items: flex-end;
   gap: 14px;
   flex: none;
+}
+.mini-note {
+  font-size: 12.5px;
+  color: var(--faint);
+  margin-top: 2px;
+  max-width: 640px;
 }
 
 /* Skills */

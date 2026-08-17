@@ -5,10 +5,14 @@
 
   document.documentElement.classList.add("js");
 
-  /* ---------- Featured artwork (fetched data-URI text files) ---------- */
+  /* ---------- Project imagery (fetched data-URI text files) ---------- */
   [
     ["img-ids", "assets/ids.txt"],
     ["img-auth", "assets/auth.txt"],
+    ["img-filecomp", "assets/filecomp.txt"],
+    ["img-phish", "assets/phish.txt"],
+    ["img-vuln", "assets/vuln.txt"],
+    ["img-pass", "assets/pass.txt"],
   ].forEach(function (pair) {
     var el = document.getElementById(pair[0]);
     if (!el || !window.fetch) return;

@@ -6,7 +6,7 @@ Personal portfolio site. Vanilla HTML/CSS/JS — no build step, no dependencies.
 
 ## Run locally
 
-Serve the folder (the featured artwork is fetched as text, so use a local server rather than double-clicking the file):
+Serve the folder (the project imagery is fetched as text, so use a local server rather than double-clicking the file):
 
 ```bash
 python3 -m http.server 8000
@@ -19,11 +19,15 @@ python3 -m http.server 8000
 | --- | --- |
 | `index.html` | All page content and sections |
 | `styles.css` | Dark neon theme, layout, responsive rules |
-| `script.js` | Typewriter, scroll reveals, starfield canvas, mobile menu, artwork loader |
-| `assets/ids.txt` | Featured artwork #1 (WebP data URI, line-wrapped; whitespace is stripped at load) |
+| `script.js` | Typewriter, scroll reveals, starfield canvas, mobile menu, media loader |
+| `assets/ids.txt` | Featured capture #1 — real AI-IDS dashboard (WebP data URI, line-wrapped; whitespace is stripped at load) |
 | `assets/auth.txt` | Featured artwork #2 (same format) |
+| `assets/filecomp.txt` | File Compression app UI capture (same format) |
+| `assets/phish.txt` | Phishing detector training-run capture (same format) |
+| `assets/vuln.txt` | vulnscan HTML report capture (same format) |
+| `assets/pass.txt` | passguard CLI capture (same format) |
 
-To swap the artwork later, replace the contents of the corresponding `.txt` file with a new data URI.
+To swap an image later, replace the contents of the corresponding `.txt` file with a new data URI.
 
 ## Deployment (GitHub Pages)
 
@@ -32,4 +36,4 @@ To swap the artwork later, replace the contents of the corresponding `.txt` file
 3. Branch: **main**, folder **/(root)** → Save.
 4. Site goes live at `https://abhay528.github.io/portfolio`.
 
-Design direction inspired by a Figma community portfolio template; all code written from scratch.
+Design direction inspired by a Figma community portfolio template; all code written from scratch. Project captures were produced by running the actual tools (vulnscan scan, passguard CLI) or rendering the real UI code (AI-IDS dashboard, AI Compression frontend).
