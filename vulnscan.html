@@ -101,7 +101,7 @@
 
   <dl class="cs-meta">
     <div><dt>Role</dt><dd>Sole author</dd></div>
-    <div><dt>Context</dt><dd>Thiranex internship</dd></div>
+    <div><dt>Context</dt><dd>Thiranex internship, 2026</dd></div>
     <div><dt>Language</dt><dd>Python 3, stdlib only</dd></div>
     <div><dt>Interface</dt><dd>CLI · text / JSON / HTML</dd></div>
     <div><dt>Status</dt><dd>Working, tested</dd></div>
@@ -109,7 +109,7 @@
 
   <h2>The problem</h2>
   <p>The dangerous machine on a network is rarely the one someone is actively attacking. It is the one nobody remembers deploying — a forgotten staging box still answering on port 6379 with no password, or a web server running an Apache branch that stopped receiving security patches years ago.</p>
-  <p>Plenty of tools enumerate open ports. The gap I wanted to close is the step after that: <strong>an open port is not a finding</strong>. Port 80 being open is normal. Port 80 being open and serving Apache 2.2.8 is an end-of-life service with public exploits. A useful scanner has to close that interpretation gap itself, because the person running it at 2am should not have to.</p>
+  <p>Plenty of tools enumerate open ports. The gap I wanted to close is the step after that: <strong>an open port is not a finding</strong>. Port 8080 being open is normal. Port 8080 being open and serving an end-of-life Apache branch is a service with public exploits and no upstream fixes. A useful scanner has to close that interpretation gap itself, because the person running it at 2am should not have to.</p>
 
   <h2>Constraints I set</h2>
   <ul>
@@ -126,11 +126,11 @@
   <p>The host is resolved once with <code>gethostbyname</code>, then every port is dispatched to a <code>ThreadPoolExecutor</code> (100 workers by default) which calls <code>connect_ex</code> with a per-port timeout. Results are consumed through <code>as_completed</code>, so a single black-holed port cannot stall the run. Closed and filtered ports return <code>None</code> and are discarded.</p>
 
   <h3>2. Fingerprinting — <code>banner.py</code></h3>
-  <p>Open sockets get a banner grab, and the banner is parsed into a <code>(product, version)</code> pair. This is the step that upgrades “port 22 is open” into “OpenSSH 6.6.1p1 is listening on port 22”, which is the difference between an inventory and an assessment.</p>
+  <p>Open sockets get a banner grab, and the banner is parsed into a <code>(product, version)</code> pair. This is the step that upgrades “port 2222 is open” into “OpenSSH 6.6.1 is listening on port 2222”, which is the difference between an inventory and an assessment.</p>
 
   <h3>3. Assessment — <code>constants.py</code> + <code>vulndb.py</code></h3>
   <p>Two independent checks run against every open port. A <strong>static risk map</strong> flags services that are dangerous by design regardless of version — Telnet, exposed SMB and RDP, unauthenticated-by-default datastores like Redis, Elasticsearch and MongoDB. Separately, the <strong>signature database</strong> compares the detected version against known-vulnerable ranges loaded from JSON.</p>
-  <p>Version comparison is the part that looks trivial and is not. Versions are parsed into integer tuples and zero-padded before comparison, because string comparison gets this catastrophically wrong: <code>"2.2.10" &lt; "2.2.8"</code> is <code>True</code> as text and false in reality. Signatures can match either a bounded range or an exact build prefix, so <code>7.4p1</code> normalises to <code>(7, 4)</code> and still compares correctly.</p>
+  <p>Version comparison is the part that looks trivial and is not. Versions are parsed into integer tuples and zero-padded before comparison, because string comparison gets this catastrophically wrong: <code>"2.2.10" &lt; "2.2.8"</code> is <code>True</code> as text and false in reality. Signatures can match either a bounded range or an exact build prefix, so <code>6.6.1p1</code> normalises to <code>(6, 6, 1)</code> and still compares correctly.</p>
 
   <h3>4. Reporting — <code>report.py</code></h3>
   <p>One <code>render(result, fmt)</code> entry point produces text, JSON, or a self-contained HTML page. Severity is an <code>IntEnum</code>, which means a port's overall risk is just <code>max()</code> over its findings, and ports can be ordered worst-first so the most dangerous result is the first thing read.</p>
@@ -179,62 +179,64 @@
     <li>Banners are collapsed to a single line before rendering. Raw CRLF in a banner would otherwise let a target forge additional report lines and fake findings that were never detected.</li>
   </ul>
 
-  <h2>Sample output</h2>
-  <p>Against a deliberately vulnerable lab VM, the text renderer produces:</p>
+  <h2>A real run</h2>
+  <p>Against deliberately vulnerable containers on <code>127.0.0.1</code>, the text renderer produced this. Timestamps are elided; the full report prints start and finish times.</p>
   <div class="cs-term">
 <pre>==============================================================
  vulnscan report
 ==============================================================
- Target      : lab-target.local (10.0.2.15)
- Started     : 2026-07-14T11:02:41
- Finished    : 2026-07-14T11:02:44
+ Target      : 127.0.0.1 (127.0.0.1)
  Open ports  : 3
- Findings    : 4
+ Findings    : 3
 --------------------------------------------------------------
  Severity summary
    CRITICAL : 0
    HIGH     : 3
    MEDIUM   : 0
-   LOW      : 1
+   LOW      : 0
 --------------------------------------------------------------
 
-[HIGH] Port 22/tcp - SSH
+[HIGH] Port 2222/tcp - Unknown
   Product : OpenSSH 6.6.1
-  Banner  : SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.13
   Findings:
     - [HIGH] Outdated OpenSSH 6.6.1
-      Multiple remotely reachable issues fixed in later
-      releases; upgrade to a supported branch.
-
-[HIGH] Port 80/tcp - HTTP
-  Product : Apache 2.2.8
-  Banner  : Apache/2.2.8 (Ubuntu) PHP/5.2.4-2ubuntu5.10
-  Findings:
-    - [HIGH] Outdated Apache 2.2.8
-      Apache 2.2.x is end-of-life and receives no security
-      fixes.
-    - [LOW] Weak/insecure service: HTTP
-      HTTP has no transport encryption; prefer HTTPS.
+      OpenSSH versions before 8.0 contain several known
+      vulnerabilities; upgrade recommended.
 
 [HIGH] Port 6379/tcp - Redis
+  Product : Redis 5.0.0
   Findings:
     - [HIGH] Weak/insecure service: Redis
       Redis is unauthenticated by default; never expose it.
+
+[HIGH] Port 8080/tcp - HTTP-Alt
+  Product : Apache
+  Findings:
+    - [HIGH] Outdated Apache
+      This Apache branch is end-of-life and receives no
+      security fixes.
 </pre>
   </div>
-  <p>Three open ports become four ranked findings, worst first, with the reason attached to each. The same scan renders as JSON for diffing, or as a standalone HTML page to attach to a ticket.</p>
+
+  <h2>What this run taught me about my own design</h2>
+  <p>Two details in that output are more interesting than the findings themselves, and both point at the same design flaw.</p>
+  <p>Port 2222 is labelled <strong><code>Unknown</code></strong> even though the scanner correctly identified OpenSSH 6.6.1 on it. And port 8080 produced no LOW “no transport encryption” finding, even though an equivalent service on port 80 would have.</p>
+  <p>The cause is that my <strong>static risk map is keyed by port number, not by identified service.</strong> The signature-database path is banner-driven and therefore port-agnostic — which is why it caught OpenSSH on a non-standard port. The static map is not, so anything running somewhere unusual silently skips those checks. That is exactly the configuration an attacker-facing host is most likely to have.</p>
+  <p>It is a real gap, the run exposed it, and it is the next thing I would change: key the risk map on the fingerprinted service and fall back to the port only when fingerprinting fails.</p>
 
   <h2>What it does not do</h2>
   <p>Stating limits precisely is part of the job — a scanner that overstates its coverage is worse than one with a narrow, known scope.</p>
   <ul>
     <li><strong>TCP connect scan only.</strong> No SYN or UDP scanning, both of which need raw sockets and privileges. A full connect is also noisy and lands in the target's logs.</li>
+    <li><strong>Static checks are port-keyed.</strong> As above: a weak service on a non-standard port escapes the risk map, though version signatures still apply.</li>
     <li><strong>The signature database is small and hand-maintained.</strong> It is not synchronised with the NVD feed, so absence of a finding is not evidence of a patched host.</li>
     <li><strong>Banner-based fingerprinting is spoofable.</strong> A host that lies about its version will be assessed on the lie.</li>
-    <li><strong>Web header findings are misattributed.</strong> When <code>--web</code> is used, the header findings are currently appended to the first open port rather than tracked against the URL they came from. It is a reporting-accuracy bug, not a detection one, and it is next on the list.</li>
+    <li><strong>Web header findings are misattributed.</strong> When <code>--web</code> is used, the header findings are appended to the first open port rather than tracked against the URL they came from. It is a reporting-accuracy bug, not a detection one.</li>
   </ul>
 
   <h2>What I would build next</h2>
   <ul>
+    <li>Key the static risk map on fingerprinted service rather than port number.</li>
     <li>Severity-threshold exit codes, so CI can fail on HIGH but tolerate LOW.</li>
     <li>A first-class target model for web findings, fixing the attribution bug above.</li>
     <li>Signature ingestion from a public feed, with the hand-written entries kept as overrides.</li>

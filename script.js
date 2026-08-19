@@ -10,7 +10,6 @@
     ["img-ids", "assets/ids.txt"],
     ["img-filecomp", "assets/filecomp.txt"],
     ["img-phish", "assets/phish.txt"],
-    ["img-vuln", "assets/vuln.txt"],
     ["img-pass", "assets/pass.txt"],
   ].forEach(function (pair) {
     var el = document.getElementById(pair[0]);
