@@ -3,12 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Abhay Jadon — Software Engineer &amp; Security Builder</title>
-<meta name="description" content="Abhay Jadon builds full-stack applications with security baked in from the first commit — security tooling, ML threat detection, and web experiences. B.Tech CSE '27." />
-<meta property="og:title" content="Abhay Jadon — Software Engineer &amp; Security Builder" />
-<meta property="og:description" content="Full-stack applications with security built in from the first commit." />
+<title>Abhay Jadon — Security Engineer &amp; Full-Stack Developer | AppSec, Python</title>
+<meta name="description" content="Abhay Jadon — Security Engineer and Full-Stack Developer. Cyber Security Intern at Thiranex. Builds offensive-security tooling, ML threat detection, and hardened Node.js auth systems. B.Tech CSE '27, Amity University." />
+<meta property="og:title" content="Abhay Jadon — Security Engineer &amp; Full-Stack Developer" />
+<meta property="og:description" content="Cyber Security Intern at Thiranex. I build offensive-security tooling — scanners, intrusion detection, and hardened authentication." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://abhay528.github.io/portfolio/" />
+<meta property="og:image" content="https://abhay528.github.io/portfolio/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Abhay Jadon — Security Engineer &amp; Full-Stack Developer" />
+<meta name="twitter:description" content="Cyber Security Intern at Thiranex. Offensive-security tooling, intrusion detection, hardened auth." />
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%237127ba"/><text x="32" y="43" font-size="26" font-family="Arial,sans-serif" font-weight="700" fill="white" text-anchor="middle">AJ</text></svg>' />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -23,6 +31,7 @@
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
+      <a class="js-resume" href="assets/Abhay_Jadon_Resume.pdf" download>Résumé</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-actions">
@@ -45,19 +54,22 @@
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="hero-text">
-      <p class="hello">
-        Hello! I Am <strong>Abhay&nbsp;Jadon</strong>
-        <svg class="hello-arrow" viewBox="0 0 60 40" width="52" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6c14 2 26 10 30 26"/><path d="M27 30l8 4 2-9"/></svg>
-      </p>
+      <p class="avail"><span class="dot" aria-hidden="true"></span> Open to SWE internships · Cyber Security Intern @ Thiranex</p>
       <h1>An Engineer who<br /><em>ships security</em> with the&nbsp;first&nbsp;commit…</h1>
-      <p class="tagline">Because the best vulnerability is the one that never ships.</p>
-      <p class="type-line" aria-label="I'm a Software Engineer, Full-Stack Developer, Security Enthusiast, and ML Builder">
-        <span aria-hidden="true">I'm a&nbsp;</span><span class="typed" id="typed" aria-hidden="true">Software Engineer</span><span class="caret" aria-hidden="true"></span>
-      </p>
+      <p class="hero-sub">Cyber Security Intern at <strong>Thiranex</strong>, a threat-detection consultancy. B.Tech CSE '27, Amity University. I build offensive-security tooling — currently <strong>vulnscan</strong>, an async scanner that fingerprints services and flags end-of-life software, unauthenticated Redis, and outdated OpenSSH in a single pass.</p>
       <div class="hero-cta">
-        <a class="btn" href="#projects">View my work</a>
-        <a class="btn btn-ghost" href="#about">About me</a>
+        <a class="btn js-resume" href="assets/Abhay_Jadon_Resume.pdf" download>Résumé (PDF)
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 12l5 5 5-5"/><path d="M5 20h14"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#projects">View my work</a>
       </div>
+      <p class="hero-inline">
+        <a href="https://github.com/abhay528" target="_blank" rel="noopener">GitHub</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/abhay-jadon-465428349" target="_blank" rel="noopener">LinkedIn</a>
+        <span aria-hidden="true">·</span>
+        <a href="mailto:jadonabhay574@gmail.com">jadonabhay574@gmail.com</a>
+      </p>
     </div>
     <div class="hero-photo">
       <div class="ring">
@@ -70,28 +82,28 @@
   <!-- ============ ABOUT ============ -->
   <section id="about" class="section about reveal">
     <p class="currently">Currently, I'm a <strong>Cyber Security Intern at Thiranex</strong>,</p>
-    <p class="bio">A Computer Science undergrad (B.Tech '27) at Amity University, Gwalior, who ships full-stack applications with security built in from day one — FastAPI backends, Node.js authentication systems, and ML models that catch threats in real time. In one 30-day internship sprint, I designed, built, and delivered four production security tools, earning official Thiranex certification.</p>
+    <p class="bio">a threat-detection consultancy where I architect and ship production security tooling. I'm a Computer Science undergrad (B.Tech '27) at Amity University, Gwalior, working across FastAPI backends, hardened Node.js authentication, and ML models that classify threats in real time. Certified through the Thiranex internship programme and Deloitte Australia's cyber security job simulation.</p>
     <div class="stats">
-      <div class="stat"><span class="stat-num">4</span><span class="stat-label">security tools shipped in 30 days</span></div>
-      <div class="stat"><span class="stat-num">92%</span><span class="stat-label">phishing detection accuracy</span></div>
-      <div class="stat"><span class="stat-num">500+</span><span class="stat-label">events processed per second</span></div>
-      <div class="stat"><span class="stat-num">&lt;100ms</span><span class="stat-label">threat alert latency</span></div>
+      <div class="stat"><span class="stat-num">92%</span><span class="stat-label">phishing accuracy — 1,200-email held-out benchmark</span></div>
+      <div class="stat"><span class="stat-num">500+</span><span class="stat-label">events/sec sustained in the IDS pipeline</span></div>
+      <div class="stat"><span class="stat-num">&lt;100ms</span><span class="stat-label">alert latency, packet capture → dashboard</span></div>
+      <div class="stat"><span class="stat-num">48,213</span><span class="stat-label">packets analysed in a live replay · 37 threats flagged</span></div>
     </div>
   </section>
 
   <!-- ============ EXPERIENCE ============ -->
   <section id="experience" class="section reveal">
     <h2>Work Experience</h2>
-    <p class="section-sub">Cyber Security Intern · Thiranex · Jun – Jul 2026 — four production security applications architected and shipped in 30 days.</p>
+    <p class="section-sub">Cyber Security Intern · Thiranex · Jun – Jul 2026 — a threat-detection consultancy. I owned four production security applications end to end: threat-model, build, test, document, hand off.</p>
     <div class="cards">
       <a class="card" href="https://github.com/abhay528/FILE-COMPRESSION" target="_blank" rel="noopener">
         <span class="card-thumb"><img id="img-filecomp" alt="AI Compression System web UI in dark mode — file analysis with entropy meter, ML-predicted algorithm, and compression results" loading="lazy" /></span>
         <span class="card-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
         </span>
-        <h3>File Compression App</h3>
-        <p>FastAPI backend with a drag-and-drop UI and real-time entropy analytics, shrinking files by up to 60% while you watch.</p>
-        <ul class="chips"><li>Python</li><li>FastAPI</li><li>Entropy Analysis</li></ul>
+        <h3>Entropy-Routed Compression</h3>
+        <p>Picking the wrong codec costs more than picking a weak one. Measures Shannon entropy on a sample, then routes to brotli or store — 4.52/8 bits → brotli at 87% confidence, 14.88 KB → 8.71 KB, 1.71× on the reference payload.</p>
+        <ul class="chips"><li>Python</li><li>FastAPI</li><li>Entropy Analysis</li><li>brotli</li></ul>
         <span class="card-link">View repo<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
       </a>
       <a class="card" href="https://github.com/abhay528/phishing-email-detector" target="_blank" rel="noopener">
@@ -100,8 +112,8 @@
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
         </span>
         <h3>Phishing Detection Model</h3>
-        <p>Scikit-learn classifier blending TF-IDF text features with 15 hand-engineered URL heuristics — 92% accuracy on a 1,200-email benchmark.</p>
-        <ul class="chips"><li>Python</li><li>Scikit-learn</li><li>TF-IDF</li></ul>
+        <p>Generic spam filters miss targeted lures. A RandomForest votes over TF-IDF text features plus 15 hand-engineered URL heuristics — 92% accuracy on a 1,200-email held-out benchmark.</p>
+        <ul class="chips"><li>Python</li><li>Scikit-learn</li><li>TF-IDF</li><li>RandomForest</li></ul>
         <span class="card-link">View repo<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
       </a>
       <a class="card" href="https://github.com/abhay528/vulnscan" target="_blank" rel="noopener">
@@ -109,9 +121,9 @@
         <span class="card-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6-6"/></svg>
         </span>
-        <h3>Vulnerability Scanner</h3>
-        <p>Concurrent scanner fingerprinting 1,000+ ports per host, flagging weak configs and outdated software in severity-rated text, JSON, or HTML reports.</p>
-        <ul class="chips"><li>Python</li><li>Networking</li><li>GitHub Actions</li></ul>
+        <h3>vulnscan — Network Vulnerability Scanner</h3>
+        <p>Most teams don't know they're still running Apache 2.2.8. A three-stage async pipeline — port fingerprinting, end-of-life cross-reference, severity ranking — flagged 3 HIGH findings on a test host: unauthenticated Redis, EOL Apache 2.2.8, outdated OpenSSH 6.6.1.</p>
+        <ul class="chips"><li>Python</li><li>asyncio</li><li>Networking</li><li>GitHub Actions</li></ul>
         <span class="card-link">View repo<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
       </a>
       <a class="card" href="https://github.com/abhay528/passguard" target="_blank" rel="noopener">
@@ -119,9 +131,9 @@
         <span class="card-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3"/><path d="M16 7l3 3"/><path d="M13 10l2 2"/></svg>
         </span>
-        <h3>Password Analyzer</h3>
-        <p>Real-time entropy scoring and crack-time estimates with a live strength meter, k-anonymity breach checks, and PBKDF2-secured history.</p>
-        <ul class="chips"><li>Python</li><li>Cryptography</li><li>Flask</li></ul>
+        <h3>passguard — Password Entropy Analyzer</h3>
+        <p>Length rules teach people to write <code>Password1!</code>. Scores true entropy against a 27–94 character pool and reports crack time in human units: <code>hunter2</code> → 36.2 bits, cracked in ~4 seconds; a four-word passphrase → 133.1 bits.</p>
+        <ul class="chips"><li>Python</li><li>Cryptography</li><li>Flask</li><li>k-anonymity</li></ul>
         <span class="card-link">View repo<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span>
       </a>
     </div>
@@ -135,13 +147,13 @@
 
     <article class="featured reveal">
       <a class="featured-media" href="https://github.com/abhay528/INTRUSION-DETECTION-SYSTEM" target="_blank" rel="noopener" aria-label="Real-Time Intrusion Detection Dashboard on GitHub">
-        <img id="img-ids" alt="AI-IDS real-time dashboard — live alerts, network traffic chart, and attack-type distribution (actual product UI)" width="760" height="424" loading="lazy" />
+        <img id="img-ids" alt="AI-IDS real-time dashboard — live alerts, network traffic chart, and attack-type distribution (actual product UI)" width="600" height="408" loading="lazy" />
       </a>
       <div class="featured-body">
         <p class="featured-label">Featured Project</p>
         <h3>Real-Time Intrusion Detection Dashboard</h3>
         <div class="featured-card">
-          <p>A production-grade network IDS processing <strong>500+ events per second</strong>. A Random Forest, Isolation Forest, and deep neural network ensemble votes over <strong>41 statistical flow features</strong> to classify 5 attack categories — pushing alerts to a live WebSocket dashboard in <strong>under 100ms</strong>. Ships with Docker for one-command deployment.</p>
+          <p>A network IDS built as three separable stages: a Scapy capture layer, an ensemble scoring engine, and a WebSocket alert channel. A Random Forest, Isolation Forest, and deep neural network vote over <strong>41 statistical flow features</strong> to classify 5 attack categories. In a live replay it analysed <strong>48,213 packets</strong>, flagged <strong>37 threats</strong> and escalated <strong>6 alerts</strong> at <strong>sub-100ms</strong> latency. One-command Docker deploy.</p>
         </div>
         <ul class="chips"><li>Python</li><li>FastAPI</li><li>Scapy</li><li>Scikit-learn</li><li>WebSockets</li><li>Docker</li></ul>
         <a class="repo-link" href="https://github.com/abhay528/INTRUSION-DETECTION-SYSTEM" target="_blank" rel="noopener">
@@ -153,13 +165,56 @@
 
     <article class="featured featured-flip reveal">
       <a class="featured-media" href="https://github.com/abhay528/secure-login-system" target="_blank" rel="noopener" aria-label="Secure Authentication System on GitHub">
-        <img id="img-auth" alt="Glowing glass login card with a fingerprint and shield of light" width="760" height="424" loading="lazy" />
+        <svg class="flow-diagram" viewBox="0 0 600 408" width="600" height="408" role="img" aria-label="Authentication request pipeline: POST /login, a rate limiter returning 429 after 5 attempts in 15 minutes, bcrypt comparison at 12 rounds, TOTP verification per RFC 6238, then session rotation with an httpOnly SameSite cookie.">
+          <rect width="600" height="408" fill="#0d0221"/>
+          <text x="30" y="38" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="12" letter-spacing="2.4" fill="#a55eff">AUTH REQUEST PIPELINE</text>
+          <line x1="56" y1="114" x2="56" y2="130" stroke="#3d2168" stroke-width="1.5"/>
+          <line x1="56" y1="182" x2="56" y2="198" stroke="#3d2168" stroke-width="1.5"/>
+          <line x1="56" y1="250" x2="56" y2="266" stroke="#3d2168" stroke-width="1.5"/>
+          <line x1="56" y1="318" x2="56" y2="334" stroke="#3d2168" stroke-width="1.5"/>
+          <g>
+            <rect x="30" y="62" width="540" height="52" rx="10" fill="#150733" stroke="#2b1553"/>
+            <circle cx="56" cy="88" r="11" fill="#2b1553"/>
+            <text x="56" y="92" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="#c9a2ff">1</text>
+            <text x="82" y="85" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="13.5" fill="#f2eefc">POST /login</text>
+            <text x="82" y="102" font-family="'Inter Tight', sans-serif" font-size="11.5" fill="rgba(242,238,252,0.58)">Credentials over TLS · Helmet security headers applied</text>
+          </g>
+          <g>
+            <rect x="30" y="130" width="540" height="52" rx="10" fill="#150733" stroke="#2b1553"/>
+            <circle cx="56" cy="156" r="11" fill="#2b1553"/>
+            <text x="56" y="160" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="#c9a2ff">2</text>
+            <text x="82" y="153" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="13.5" fill="#f2eefc">rateLimit()</text>
+            <text x="82" y="170" font-family="'Inter Tight', sans-serif" font-size="11.5" fill="rgba(242,238,252,0.58)">5 attempts / 15 min per IP, then</text>
+            <text x="258" y="170" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11.5" fill="#ffb35c">429 Too Many Requests</text>
+          </g>
+          <g>
+            <rect x="30" y="198" width="540" height="52" rx="10" fill="#150733" stroke="#2b1553"/>
+            <circle cx="56" cy="224" r="11" fill="#2b1553"/>
+            <text x="56" y="228" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="#c9a2ff">3</text>
+            <text x="82" y="221" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="13.5" fill="#f2eefc">bcrypt.compare()</text>
+            <text x="82" y="238" font-family="'Inter Tight', sans-serif" font-size="11.5" fill="rgba(242,238,252,0.58)">12 rounds · constant-time · parameterized queries only</text>
+          </g>
+          <g>
+            <rect x="30" y="266" width="540" height="52" rx="10" fill="#150733" stroke="#2b1553"/>
+            <circle cx="56" cy="292" r="11" fill="#2b1553"/>
+            <text x="56" y="296" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="#c9a2ff">4</text>
+            <text x="82" y="289" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="13.5" fill="#f2eefc">verifyTOTP()</text>
+            <text x="82" y="306" font-family="'Inter Tight', sans-serif" font-size="11.5" fill="rgba(242,238,252,0.58)">RFC 6238 · 30s step · ±1 window drift · QR onboarding</text>
+          </g>
+          <g>
+            <rect x="30" y="334" width="540" height="52" rx="10" fill="#150733" stroke="#4ade80" stroke-opacity="0.35"/>
+            <circle cx="56" cy="360" r="11" fill="#16371f"/>
+            <text x="56" y="364" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="#4ade80">5</text>
+            <text x="82" y="357" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="13.5" fill="#f2eefc">rotateSession()</text>
+            <text x="82" y="374" font-family="'Inter Tight', sans-serif" font-size="11.5" fill="rgba(242,238,252,0.58)">New SID defeats session fixation · httpOnly · SameSite=Lax</text>
+          </g>
+        </svg>
       </a>
       <div class="featured-body">
         <p class="featured-label">Featured Project</p>
         <h3>Secure Authentication System</h3>
         <div class="featured-card">
-          <p>A Node.js + Express login system hardened at every layer: <strong>12-round bcrypt</strong> hashing, parameterized queries that eliminate SQL injection, <strong>TOTP two-factor auth</strong> with QR onboarding, session-fixation protection, and brute-force lockout backed by global rate limiting.</p>
+          <p>A Node.js + Express login system hardened at every layer: <strong>12-round bcrypt</strong> hashing, parameterized queries that eliminate SQL injection, <strong>TOTP two-factor auth</strong> with QR onboarding, session rotation that defeats fixation, and brute-force lockout backed by global rate limiting.</p>
         </div>
         <ul class="chips"><li>Node.js</li><li>Express</li><li>SQLite</li><li>Bcrypt</li><li>TOTP 2FA</li><li>Helmet</li></ul>
         <a class="repo-link" href="https://github.com/abhay528/secure-login-system" target="_blank" rel="noopener">
@@ -204,37 +259,14 @@
     </div>
   </section>
 
-  <!-- ============ CERTIFICATIONS ============ -->
-  <section class="section reveal">
-    <h2>Certifications</h2>
-    <div class="cert-grid">
-      <div class="cert">
-        <span class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg>
-        </span>
-        <div>
-          <h3>Cyber Security Job Simulation</h3>
-          <p>Deloitte Australia · Forage · Jun 2026</p>
-        </div>
-      </div>
-      <div class="cert">
-        <span class="card-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg>
-        </span>
-        <div>
-          <h3>Cyber Security Internship Certification</h3>
-          <p>Thiranex · Jul 2026</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="section contact reveal">
     <h2>Let's build something <em>secure</em>.</h2>
-    <p>I'm open to Software Engineering internships and security-focused projects. My inbox is always open — I'll get back to you fast.</p>
+    <p>I'm open to Software Engineering internships and security-focused projects.</p>
+    <p class="tagline">Because the best vulnerability is the one that never ships.</p>
     <div class="contact-actions">
       <a class="btn" href="mailto:jadonabhay574@gmail.com">Say hello</a>
+      <a class="btn btn-ghost js-resume" href="assets/Abhay_Jadon_Resume.pdf" download>Résumé (PDF)</a>
       <div class="socials">
         <a class="icon-link" href="https://github.com/abhay528" target="_blank" rel="noopener" aria-label="GitHub profile">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.54-3.87-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14 0 1.54-.02 2.79-.02 3.17 0 .31.21.67.8.55A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
@@ -247,6 +279,7 @@
         </a>
       </div>
     </div>
+    <p class="contact-email"><a href="mailto:jadonabhay574@gmail.com">jadonabhay574@gmail.com</a></p>
   </section>
 
 </main>

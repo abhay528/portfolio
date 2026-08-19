@@ -8,7 +8,6 @@
   /* ---------- Project imagery (fetched data-URI text files) ---------- */
   [
     ["img-ids", "assets/ids.txt"],
-    ["img-auth", "assets/auth.txt"],
     ["img-filecomp", "assets/filecomp.txt"],
     ["img-phish", "assets/phish.txt"],
     ["img-vuln", "assets/vuln.txt"],
@@ -26,52 +25,32 @@
       .catch(function () {});
   });
 
+  /* ---------- Résumé link: only show it if the PDF is actually there ----------
+     Prevents a dead "Résumé" link from ever shipping. Drop the file at
+     assets/Abhay_Jadon_Resume.pdf and every résumé CTA appears automatically. */
+  var RESUME_PATH = "assets/Abhay_Jadon_Resume.pdf";
+  var resumeEls = document.querySelectorAll(".js-resume");
+  if (resumeEls.length) {
+    if (!window.fetch) {
+      Array.prototype.forEach.call(resumeEls, function (el) {
+        el.parentNode && el.parentNode.removeChild(el);
+      });
+    } else {
+      fetch(RESUME_PATH, { method: "HEAD" })
+        .then(function (res) {
+          if (!res.ok) throw new Error("missing");
+        })
+        .catch(function () {
+          Array.prototype.forEach.call(resumeEls, function (el) {
+            el.parentNode && el.parentNode.removeChild(el);
+          });
+        });
+    }
+  }
+
   var prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
-
-  /* ---------- Typewriter ---------- */
-  var words = [
-    "Software Engineer",
-    "Full-Stack Developer",
-    "Security Enthusiast",
-    "ML Builder",
-  ];
-  var typedEl = document.getElementById("typed");
-
-  if (typedEl) {
-    if (prefersReducedMotion) {
-      typedEl.textContent = words[0];
-    } else {
-      var wordIndex = 0;
-      var charIndex = words[0].length;
-      var deleting = true;
-
-      // Start by deleting the SSR word for a clean loop.
-      setTimeout(tick, 900);
-
-      function tick() {
-        var word = words[wordIndex];
-        if (deleting) {
-          charIndex--;
-          if (charIndex === 0) {
-            deleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-          }
-        } else {
-          charIndex++;
-          if (charIndex === words[wordIndex].length) {
-            deleting = true;
-            typedEl.textContent = words[wordIndex];
-            setTimeout(tick, 1700);
-            return;
-          }
-        }
-        typedEl.textContent = words[wordIndex].slice(0, charIndex);
-        setTimeout(tick, deleting ? 38 : 68);
-      }
-    }
-  }
 
   /* ---------- Nav: scrolled state + mobile menu ---------- */
   var nav = document.getElementById("siteNav");

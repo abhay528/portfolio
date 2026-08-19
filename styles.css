@@ -14,12 +14,15 @@
   --violet: #7127ba;
   --violet-bright: #a55eff;
   --lilac: #c9a2ff;
+  --ok: #4ade80;
   --grad: linear-gradient(94deg, #d0a5ff 0%, #9b4dff 55%, #6a25d9 100%);
   --glow: 0 0 42px rgba(139, 61, 255, 0.35);
   --max: 1120px;
   --radius: 16px;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter,
+  --font: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,6 +55,15 @@ body {
 }
 
 ::selection { background: rgba(165, 94, 255, 0.4); }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: rgba(165, 94, 255, 0.12);
+  color: var(--lilac);
+}
 
 .skip {
   position: absolute;
@@ -188,26 +200,39 @@ a:focus-visible, button:focus-visible {
   gap: 48px;
   min-height: 92vh;
 }
-.hello {
-  display: flex;
+
+/* Availability badge — answers "are they open?" before anything else */
+.avail {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 19px;
-  color: var(--muted);
-  margin-bottom: 18px;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  color: var(--text);
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.28);
+  padding: 7px 16px 7px 13px;
+  border-radius: 999px;
+  margin-bottom: 24px;
 }
-.hello strong { color: var(--text); font-weight: 700; }
-.hello-arrow {
-  color: var(--violet-bright);
-  transform: translateY(6px);
+.avail .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   flex: none;
+  background: var(--ok);
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
+  animation: pulse 2.4s ease-in-out infinite;
 }
+@keyframes pulse { 50% { opacity: 0.4; } }
+
 .hero h1 {
   font-size: clamp(40px, 5.6vw, 66px);
   line-height: 1.12;
-  letter-spacing: -1.6px;
+  letter-spacing: -1.8px;
   font-weight: 800;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 .hero h1 em, .cta-line em, .contact h2 em {
   font-style: italic;
@@ -217,35 +242,34 @@ a:focus-visible, button:focus-visible {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+.hero-sub {
+  font-size: 17.5px;
+  color: var(--muted);
+  max-width: 620px;
+  margin-bottom: 32px;
+}
+.hero-sub strong { color: var(--text); font-weight: 650; }
 .tagline {
   font-size: 18px;
   color: var(--muted);
   margin-bottom: 34px;
 }
-.type-line {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 40px;
-  min-height: 34px;
-}
-.typed {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-.caret {
-  display: inline-block;
-  width: 2px;
-  height: 1.15em;
-  margin-left: 4px;
-  vertical-align: text-bottom;
-  background: var(--violet-bright);
-  animation: blink 1s steps(1) infinite;
-}
-@keyframes blink { 50% { opacity: 0; } }
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-inline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  font-size: 14.5px;
+  color: var(--faint);
+}
+.hero-inline a {
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.hero-inline a:hover { color: var(--text); border-bottom-color: var(--violet-bright); }
 
 .hero-photo { display: flex; justify-content: center; }
 .ring {
@@ -296,13 +320,13 @@ a:focus-visible, button:focus-visible {
 }
 .section h2 {
   font-size: clamp(30px, 4vw, 42px);
-  letter-spacing: -1px;
+  letter-spacing: -1.2px;
   font-weight: 800;
   margin-bottom: 16px;
 }
 .section-sub {
   color: var(--muted);
-  max-width: 640px;
+  max-width: 700px;
   margin-bottom: 40px;
 }
 
@@ -310,7 +334,7 @@ a:focus-visible, button:focus-visible {
 .about .currently {
   font-size: clamp(22px, 2.6vw, 30px);
   font-weight: 700;
-  letter-spacing: -0.6px;
+  letter-spacing: -0.7px;
   margin-bottom: 18px;
 }
 .about .currently strong {
@@ -338,17 +362,18 @@ a:focus-visible, button:focus-visible {
 }
 .stat-num {
   display: block;
-  font-size: clamp(28px, 3.4vw, 40px);
-  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
   letter-spacing: -1px;
   background: var(--grad);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
-.stat-label { font-size: 14px; color: var(--muted); line-height: 1.45; display: block; }
+.stat-label { font-size: 13.5px; color: var(--muted); line-height: 1.45; display: block; }
 
 /* Experience cards */
 .cards {
@@ -383,7 +408,7 @@ a:focus-visible, button:focus-visible {
   background: rgba(139, 61, 255, 0.14);
   border: 1px solid rgba(165, 94, 255, 0.3);
 }
-.card h3 { font-size: 20px; letter-spacing: -0.4px; }
+.card h3 { font-size: 19.5px; letter-spacing: -0.5px; }
 .card p { color: var(--muted); font-size: 15.5px; flex: 1; }
 .card-link {
   display: inline-flex;
@@ -395,13 +420,14 @@ a:focus-visible, button:focus-visible {
 }
 .card:hover .card-link { color: #dcc2ff; }
 
-/* Card media thumbnails (real product captures) */
+/* Card media thumbnails (real product captures).
+   4:3 keeps tall UI captures readable instead of slicing them mid-content. */
 .card .card-thumb {
   display: block;
   margin: -30px -28px 8px;
   border-radius: 15px 15px 10px 10px;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   background: #0d0221;
   border-bottom: 1px solid var(--border);
 }
@@ -438,7 +464,7 @@ a:focus-visible, button:focus-visible {
   text-align: center;
   font-size: clamp(24px, 3.2vw, 36px);
   font-weight: 700;
-  letter-spacing: -0.8px;
+  letter-spacing: -1px;
   line-height: 1.35;
 }
 
@@ -467,6 +493,11 @@ a:focus-visible, button:focus-visible {
   width: 100%;
   height: auto;
 }
+.flow-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .featured-body {
   position: relative;
   z-index: 2;
@@ -482,15 +513,16 @@ a:focus-visible, button:focus-visible {
 .featured-flip .repo-link { margin-left: auto; }
 .featured-label {
   color: var(--violet-bright);
-  font-size: 13.5px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1.6px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
 .featured-body h3 {
   font-size: clamp(22px, 2.6vw, 28px);
-  letter-spacing: -0.6px;
+  letter-spacing: -0.8px;
   margin-bottom: 16px;
 }
 .featured-card {
@@ -534,7 +566,7 @@ a:focus-visible, button:focus-visible {
   border-color: rgba(165, 94, 255, 0.45);
   box-shadow: 0 18px 44px rgba(123, 46, 224, 0.16);
 }
-.mini-text h3 { font-size: 20px; letter-spacing: -0.4px; margin-bottom: 8px; }
+.mini-text h3 { font-size: 20px; letter-spacing: -0.5px; margin-bottom: 8px; }
 .mini-text p { color: var(--muted); font-size: 15.5px; max-width: 640px; margin-bottom: 14px; }
 .mini-links {
   display: flex;
@@ -567,32 +599,14 @@ a:focus-visible, button:focus-visible {
 }
 .skill-row:last-child { border-bottom: none; }
 .skill-row h3 {
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--faint);
   padding-top: 4px;
 }
-
-/* Certifications */
-.cert-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 28px;
-}
-.cert {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-}
-.cert h3 { font-size: 16.5px; letter-spacing: -0.2px; margin-bottom: 3px; }
-.cert p { color: var(--muted); font-size: 14px; }
 
 /* Contact */
 .contact {
@@ -606,7 +620,13 @@ a:focus-visible, button:focus-visible {
 .contact p {
   color: var(--muted);
   max-width: 520px;
+  margin: 0 auto 14px;
+}
+.contact .tagline {
   margin: 0 auto 34px;
+  max-width: 520px;
+  font-size: 17px;
+  color: var(--faint);
 }
 .contact-actions {
   display: flex;
@@ -617,6 +637,17 @@ a:focus-visible, button:focus-visible {
 }
 .socials { display: flex; gap: 6px; }
 .socials .icon-link { border-color: var(--border); }
+.contact-email {
+  margin: 26px auto 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+.contact-email a {
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.contact-email a:hover { color: var(--text); border-bottom-color: var(--violet-bright); }
 
 /* Footer */
 footer {
@@ -699,10 +730,13 @@ html.js .reveal {
   body { font-size: 16px; }
   .stats { grid-template-columns: 1fr 1fr; }
   .cards { grid-template-columns: 1fr; }
-  .cert-grid { grid-template-columns: 1fr; }
   .skill-row { grid-template-columns: 1fr; gap: 12px; }
   .nav-inner { padding: 14px 20px; gap: 16px; }
-  .nav-actions .btn { display: none; }
+  /* Keep the primary CTA on mobile — hide the icon links instead,
+     they are duplicated in the hero and contact sections. */
+  .nav-actions .icon-link { display: none; }
+  .nav-actions .btn { padding: 8px 14px; font-size: 13.5px; }
+  .avail { font-size: 12.5px; padding: 6px 13px 6px 11px; }
   .hero { padding: 120px 20px 70px; }
   .section { padding: 64px 20px 0; }
   footer { padding: 24px 20px 32px; }
@@ -714,6 +748,6 @@ html.js .reveal {
   html { scroll-behavior: auto; }
   html.js .reveal { opacity: 1; transform: none; transition: none; }
   .ring::before { animation: none; }
-  .caret { animation: none; }
+  .avail .dot { animation: none; }
   .btn, .card, .featured-media { transition: none; }
 }
