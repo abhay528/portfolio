@@ -1,170 +1,37 @@
-/* Abhay Jadon — Portfolio */
-
-(function () {
-  "use strict";
-
-  document.documentElement.classList.add("js");
-
-  /* ---------- Project imagery (fetched data-URI text files) ---------- */
-  [
-    ["img-ids", "assets/ids.txt"],
-    ["img-filecomp", "assets/filecomp.txt"],
-    ["img-phish", "assets/phish.txt"],
-    ["img-pass", "assets/pass.txt"],
-  ].forEach(function (pair) {
-    var el = document.getElementById(pair[0]);
-    if (!el || !window.fetch) return;
-    fetch(pair[1])
-      .then(function (res) {
-        return res.ok ? res.text() : Promise.reject(res.status);
-      })
-      .then(function (text) {
-        el.src = text.replace(/\s+/g, "");
-      })
-      .catch(function () {});
+/* Optional enhancements only. Every page works without this file. */
+(() => {
+  'use strict';
+  document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
+  document.querySelectorAll('details.mobile-nav').forEach(menu => {
+    const summary = menu.querySelector('summary');
+    const close = (returnFocus = false) => {
+      if (!menu.open) return;
+      menu.open = false;
+      if (returnFocus && summary) summary.focus();
+    };
+    menu.addEventListener('click', event => {
+      if (event.target instanceof Element && event.target.closest('a')) close();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.open) { close(true); }
+    });
+    document.addEventListener('click', event => {
+      if (event.target instanceof Node && !menu.contains(event.target)) close();
+    });
+    const desktop = window.matchMedia('(min-width: 761px)');
+    if (desktop.addEventListener) desktop.addEventListener('change', event => { if (event.matches) close(); });
   });
-
-  /* ---------- Résumé link: only show it if the PDF is actually there ----------
-     Prevents a dead "Résumé" link from ever shipping. Drop the file at
-     assets/Abhay_Jadon_Resume.pdf and every résumé CTA appears automatically. */
-  var RESUME_PATH = "assets/Abhay_Jadon_Resume.pdf";
-  var resumeEls = document.querySelectorAll(".js-resume");
-  if (resumeEls.length) {
-    if (!window.fetch) {
-      Array.prototype.forEach.call(resumeEls, function (el) {
-        el.parentNode && el.parentNode.removeChild(el);
-      });
-    } else {
-      fetch(RESUME_PATH, { method: "HEAD" })
-        .then(function (res) {
-          if (!res.ok) throw new Error("missing");
-        })
-        .catch(function () {
-          Array.prototype.forEach.call(resumeEls, function (el) {
-            el.parentNode && el.parentNode.removeChild(el);
-          });
-        });
-    }
-  }
-
-  var prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-  /* ---------- Nav: scrolled state + mobile menu ---------- */
-  var nav = document.getElementById("siteNav");
-  var menuBtn = document.getElementById("menuBtn");
-  var navLinks = document.getElementById("navLinks");
-
-  function onScroll() {
-    if (window.scrollY > 24) nav.classList.add("scrolled");
-    else nav.classList.remove("scrolled");
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  if (menuBtn && navLinks) {
-    menuBtn.addEventListener("click", function () {
-      var open = navLinks.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    navLinks.addEventListener("click", function (event) {
-      if (event.target.tagName === "A") {
-        navLinks.classList.remove("open");
-        menuBtn.setAttribute("aria-expanded", "false");
+  const copy = document.getElementById('copy-email');
+  const status = document.getElementById('copy-status');
+  if (copy && status && navigator.clipboard && window.isSecureContext) {
+    copy.hidden = false;
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('jadonabhay574@gmail.com');
+        status.textContent = 'Email address copied.';
+      } catch {
+        status.textContent = 'Copy unavailable. Select the visible email address instead.';
       }
     });
   }
-
-  /* ---------- Reveal on scroll ---------- */
-  var revealEls = document.querySelectorAll(".reveal");
-  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-    revealEls.forEach(function (el) {
-      el.classList.add("visible");
-    });
-  } else {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    revealEls.forEach(function (el) {
-      observer.observe(el);
-    });
-  }
-
-  /* ---------- Starfield ---------- */
-  var canvas = document.getElementById("stars");
-  if (canvas && canvas.getContext) {
-    var ctx = canvas.getContext("2d");
-    var stars = [];
-    var width = 0;
-    var height = 0;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    function resize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      canvas.style.width = width + "px";
-      canvas.style.height = height + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      seed();
-      if (prefersReducedMotion) draw(0);
-    }
-
-    function seed() {
-      var count = Math.min(160, Math.floor((width * height) / 9000));
-      stars = [];
-      for (var i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          r: 0.4 + Math.random() * 1.1,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.02 + Math.random() * 0.05,
-          violet: Math.random() < 0.3,
-        });
-      }
-    }
-
-    function draw(time) {
-      ctx.clearRect(0, 0, width, height);
-      for (var i = 0; i < stars.length; i++) {
-        var s = stars[i];
-        var alpha = 0.25 + 0.55 * Math.abs(Math.sin(time / 1600 + s.phase));
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = s.violet
-          ? "rgba(201, 162, 255, " + alpha + ")"
-          : "rgba(255, 255, 255, " + alpha * 0.8 + ")";
-        ctx.fill();
-        s.y -= s.speed;
-        if (s.y < -4) {
-          s.y = height + 4;
-          s.x = Math.random() * width;
-        }
-      }
-    }
-
-    function loop(time) {
-      draw(time);
-      requestAnimationFrame(loop);
-    }
-
-    window.addEventListener("resize", resize);
-    resize();
-    if (!prefersReducedMotion) requestAnimationFrame(loop);
-  }
-
-  /* ---------- Footer year ---------- */
-  var yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 })();
