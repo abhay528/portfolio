@@ -38,3 +38,8 @@ See `RELEASE-NOTES.md` and `EVIDENCE.md`. Unsupported metrics were removed rathe
 
 ## Safe cutover
 The new pages reference premium.css/premium.js. Legacy styles.css/script.js remain for cached older pages, but are not loaded by the redesign. GitHub pull-request creation was rejected; publication uses ordinary non-force commits on the unprotected main branch, staging dependencies before the homepage cutover.
+
+## Evidence Topology
+The homepage hero progressively enhances its ordinary project links and semantic inline SVG with an optional, decorative Three.js view. The pinned Three.js 0.180.0 module is loaded from jsDelivr only after WebGL capability checks; if WebGL, the import, initialization, or the context fails, the SVG remains visible and the links remain usable. The CDN dependency has no SRI claim; self-host the pinned module before release if CDN independence is required. The feature adds no user tracking.
+
+Hover and keyboard focus update the visible route caption without changing normal link behavior. Reduced-motion changes disable pointer parallax, narrow/coarse displays prefer SVG, rendering is event-driven and skipped while hidden or offscreen, and resources/listeners are cleaned up on `pagehide`.
