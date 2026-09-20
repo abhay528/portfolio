@@ -19,6 +19,10 @@ const OUT=path.join(ROOT,'.artifacts');fs.mkdirSync(OUT,{recursive:true});
    const audit=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth+1,h1:document.querySelectorAll('h1').length,brokenImages:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).length,hiddenContent:[...document.querySelectorAll('main section')].some(x=>getComputedStyle(x).opacity==='0'),canonical:document.querySelector('link[rel="canonical"]').href}));
    results.layouts.push({file,width,...audit});
    if(audit.overflow||audit.h1!==1||audit.brokenImages||audit.hiddenContent)throw Error('Layout check failed '+JSON.stringify({file,width,...audit}));
+   if(file==='index.html'){
+    const topology=await page.evaluate(()=>({links:document.querySelectorAll('.topology-index a[data-route]').length,overflow:document.querySelector('.evidence-topology').scrollWidth>document.querySelector('.evidence-topology').clientWidth+1}));
+    if(topology.links!==3||topology.overflow)throw Error('Topology layout failed '+JSON.stringify({width,...topology}));
+   }
    if(file==='index.html'&&width===1440)await page.screenshot({path:path.join(OUT,'desktop.png')});
    if(file==='index.html'&&width===390)await page.screenshot({path:path.join(OUT,'mobile.png')});
   }
